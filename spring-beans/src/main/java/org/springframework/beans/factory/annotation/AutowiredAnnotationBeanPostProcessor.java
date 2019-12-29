@@ -529,6 +529,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 	}
 
 	/**
+	 * 把bean的依赖关系注册到#{@link org.springframework.beans.factory.support.DefaultSingletonBeanRegistry#dependentBeanMap}
 	 * Register the specified bean as dependent on the autowired beans.
 	 */
 	private void registerDependentBeans(@Nullable String beanName, Set<String> autowiredBeanNames) {

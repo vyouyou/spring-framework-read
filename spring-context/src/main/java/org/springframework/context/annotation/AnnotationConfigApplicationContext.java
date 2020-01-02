@@ -85,6 +85,10 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
 		this();
+		/**
+		 * {@link AnnotatedBeanDefinitionReader#registerBean(java.lang.Class)}
+		 * 调用register方法，把传入的bean注册进去
+		 */
 		register(componentClasses);
 		refresh();
 	}

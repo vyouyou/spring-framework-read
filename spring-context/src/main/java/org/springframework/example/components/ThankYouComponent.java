@@ -8,12 +8,16 @@ import org.springframework.stereotype.Component;
 import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 @Component
-@Scope(value=SCOPE_PROTOTYPE)
+@Lazy
 public class ThankYouComponent {
 	@Autowired
 	private HelloComponent helloComponent;
 
 	public ThankYouComponent(){
 		System.out.println("thank you");
+	}
+
+	public void say(){
+		System.out.println("say thank you");
 	}
 }

@@ -435,6 +435,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		return result;
 	}
 
+	/**
+	 * 在这里进行bean的处理，aop在此处执行返回一个增强后的bean
+	 * @param existingBean the existing bean instance
+	 * @param beanName the name of the bean, to be passed to it if necessary
+	 * (only passed to {@link BeanPostProcessor BeanPostProcessors};
+	 * can follow the {@link #ORIGINAL_INSTANCE_SUFFIX} convention in order to
+	 * enforce the given instance to be returned, i.e. no proxies etc)
+	 * @return
+	 * @throws BeansException
+	 */
 	@Override
 	public Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
 			throws BeansException {
@@ -1352,7 +1362,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	}
 
 	/**
-	 * 填充bean instance  并且调用InstantiationAwareBeanPostProcessor对它进行处理
+	 * 填充bean instance  并且调用{@link org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor}
+	 * InstantiationAwareBeanPostProcessor对它进行处理
 	 * Populate the bean instance in the given BeanWrapper with the property values
 	 * from the bean definition.
 	 *
@@ -1788,7 +1799,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					(mbd != null ? mbd.getResourceDescription() : null),
 					beanName, "Invocation of init method failed", ex);
 		}
-		// 执行postProcessAfterInitialization方法
+		// 执行postProcessAfterInitialization方法 aop就在这里执行
 		if (mbd == null || !mbd.isSynthetic()) {
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}

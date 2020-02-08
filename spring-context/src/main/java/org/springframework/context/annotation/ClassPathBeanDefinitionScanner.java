@@ -62,7 +62,7 @@ import org.springframework.util.PatternMatchUtils;
  */
 public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateComponentProvider {
 	/**
-	 * registry为
+	 * 为BeanFactory
 	 */
 	private final BeanDefinitionRegistry registry;
 

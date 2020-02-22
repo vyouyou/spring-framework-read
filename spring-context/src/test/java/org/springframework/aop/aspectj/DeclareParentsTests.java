@@ -18,11 +18,15 @@ package org.springframework.aop.aspectj;
 
 import org.junit.Before;
 import org.junit.Test;
+import sun.misc.ProxyGenerator;
 import test.mixin.Lockable;
 
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.tests.sample.beans.ITestBean;
+
+import java.io.File;
+import java.io.FileOutputStream;
 
 import static org.junit.Assert.*;
 
@@ -49,6 +53,15 @@ public class DeclareParentsTests {
 	@Test
 	public void testIntroductionWasMade() {
 		assertTrue(AopUtils.isAopProxy(testBeanProxy));
+		byte[] bytes = ProxyGenerator.generateProxyClass("$Proxy", new Class[]{testBeanProxy.getClass()});
+		try (
+				FileOutputStream fos = new FileOutputStream(new File("D:/$Proxy.class"))
+		) {
+			fos.write(bytes);
+			fos.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		assertFalse("Introduction should not be proxied", AopUtils.isAopProxy(introductionObject));
 		assertTrue("Introduction must have been made", testBeanProxy instanceof Lockable);
 	}
@@ -70,8 +83,7 @@ public class DeclareParentsTests {
 		try {
 			testBeanProxy.setName(" ");
 			fail("Should be locked");
-		}
-		catch (IllegalStateException ex) {
+		} catch (IllegalStateException ex) {
 			// expected
 		}
 	}

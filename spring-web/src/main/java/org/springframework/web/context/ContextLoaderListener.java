@@ -96,6 +96,7 @@ public class ContextLoaderListener extends ContextLoader implements ServletConte
 
 
 	/**
+	 * sevlet 的contextInitialized钩子函数，用来初始化context
 	 * Initialize the root web application context.
 	 */
 	@Override

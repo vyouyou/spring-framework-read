@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloComponent implements InitializingBean {
 	@Autowired(required = false)
-	private ThankYouComponent thankYouComponent;
+	private IThankYou thankYou;
 	@Autowired
 	private IExampleFactory factory;
 
@@ -25,6 +25,6 @@ public class HelloComponent implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		System.out.println("hello,after properties set");
-		thankYouComponent.say();
+		thankYou.say();
 	}
 }

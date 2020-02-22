@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
 /**
  * Convenient superclass for application objects that want to be aware of
  * the application context, e.g. for custom lookup of collaborating beans
- * or for context-specific resource access. It saves the application
+ * or for context-specific resource access. It saves the applica	 tion
  * context reference and provides an initialization callback method.
  * Furthermore, it offers numerous convenience methods for message lookup.
  *

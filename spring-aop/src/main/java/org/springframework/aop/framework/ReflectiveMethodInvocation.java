@@ -62,7 +62,9 @@ import org.springframework.lang.Nullable;
 public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Cloneable {
 
 	protected final Object proxy;
-
+	/**
+	 * 用于执行method的object
+	 */
 	@Nullable
 	protected final Object target;
 
@@ -159,6 +161,7 @@ public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Clonea
 	@Nullable
 	public Object proceed() throws Throwable {
 		// We start with an index of -1 and increment early.
+		// 直接执行
 		if (this.currentInterceptorIndex == this.interceptorsAndDynamicMethodMatchers.size() - 1) {
 			return invokeJoinpoint();
 		}
@@ -172,11 +175,13 @@ public class ReflectiveMethodInvocation implements ProxyMethodInvocation, Clonea
 					(InterceptorAndDynamicMethodMatcher) interceptorOrInterceptionAdvice;
 			Class<?> targetClass = (this.targetClass != null ? this.targetClass : this.method.getDeclaringClass());
 			if (dm.methodMatcher.matches(this.method, targetClass, this.arguments)) {
+				// 把自己传进去 如果是before after等还会递归调用自身
 				return dm.interceptor.invoke(this);
 			}
 			else {
 				// Dynamic matching failed.
 				// Skip this interceptor and invoke the next in the chain.
+				// 递归调用
 				return proceed();
 			}
 		}

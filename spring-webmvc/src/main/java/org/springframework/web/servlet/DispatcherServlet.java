@@ -592,7 +592,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	 */
 	private void initHandlerMappings(ApplicationContext context) {
 		this.handlerMappings = null;
-
+		// 扫描实现了handlerMapping的bean 比如RequestMappingHandlerMapping
 		if (this.detectAllHandlerMappings) {
 			// Find all HandlerMappings in the ApplicationContext, including ancestor contexts.
 			Map<String, HandlerMapping> matchingBeans =
@@ -1221,6 +1221,7 @@ public class DispatcherServlet extends FrameworkServlet {
 	}
 
 	/**
+	 * 获取对应的handler
 	 * Return the HandlerExecutionChain for this request.
 	 * <p>Tries all handler mappings in order.
 	 * @param request current HTTP request

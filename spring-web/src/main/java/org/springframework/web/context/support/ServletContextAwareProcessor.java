@@ -35,9 +35,9 @@ import org.springframework.web.context.ServletContextAware;
  *
  * @author Juergen Hoeller
  * @author Phillip Webb
- * @since 12.03.2004
  * @see org.springframework.web.context.ServletContextAware
  * @see org.springframework.web.context.support.XmlWebApplicationContext#postProcessBeanFactory
+ * @since 12.03.2004
  */
 public class ServletContextAwareProcessor implements BeanPostProcessor {
 
@@ -102,6 +102,14 @@ public class ServletContextAwareProcessor implements BeanPostProcessor {
 		return this.servletConfig;
 	}
 
+	/**
+	 * 为servletConfigAware设置servlet为DispatchServlet
+	 *
+	 * @param bean     the new bean instance
+	 * @param beanName the name of the bean
+	 * @return
+	 * @throws BeansException
+	 */
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		if (getServletContext() != null && bean instanceof ServletContextAware) {

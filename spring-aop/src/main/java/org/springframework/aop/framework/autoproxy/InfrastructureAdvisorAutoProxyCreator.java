@@ -21,6 +21,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.lang.Nullable;
 
 /**
+ * 在springboot启动的过程中，会将这个bean注册进去
  * Auto-proxy creator that considers infrastructure Advisor beans only,
  * ignoring any application-defined Advisors.
  *

@@ -9,7 +9,7 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 
 @Component
 @Lazy
-public class ThankYouComponent {
+public class ThankYouComponent implements IThankYou{
 	@Autowired
 	private HelloComponent helloComponent;
 
